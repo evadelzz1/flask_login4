@@ -25,7 +25,11 @@ Flask MySQL Authentication Tutorial: Login, Register, Logout, and Dashboard
 
 [github](https://github.com/kritimyantra/flask-mysql-auth-system)
 
-[Flask-Flask-WTF](https://velog.io/@2jinu/Flask-Flask-WTF)
+[Flask-WTF](https://velog.io/@2jinu/Flask-Flask-WTF)
+
+[Flask-Doc](https://flask-docs-kr.readthedocs.io)
+
+[wtforms Definition](https://wtforms.readthedocs.io/en/3.1.x/)
 
 
 ### mysql Install

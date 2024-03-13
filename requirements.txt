@@ -3,3 +3,4 @@ flask_wtf
 bcrypt
 flask_mysqldb
 email-validator
+python-dotenv

@@ -1,0 +1,35 @@
+# normal
+# python -c 'import secrets; print(secrets.token_hex())' 
+SECRET_KEY='user_secret_key'
+
+# database develop
+DEV_DB_USER='root'
+DEV_DB_PWD='password'
+DEV_DB_HOST='127.0.0.1'
+DEV_DB_PORT='3306'
+DEV_DB_NAME='testdb'
+
+# database product
+PROD_DB_USER='root'
+PROD_DB_PWD='password'
+PROD_DB_HOST='127.0.0.1'
+PROD_DB_PORT='3306'
+PROD_DB_NAME='testdb'
+
+# normal
+# python -c 'import secrets; print(secrets.token_hex())'
+SECRET_KEY='5d10d4c2c2e23af3377bd942f8c62762cce09465d3c65f8a67da228150ef830e'   
+
+# database develop
+DEV_DB_USER='scott'
+DEV_DB_PWD='tiger'
+DEV_DB_HOST='127.0.0.1'
+DEV_DB_PORT='3306'
+DEV_DB_NAME='flask_login4'
+
+# database product
+PROD_DB_USER='scott'
+PROD_DB_PWD='tiger'
+PROD_DB_HOST='127.0.0.1'
+PROD_DB_PORT='3306'
+PROD_DB_NAME='flask_login4'
