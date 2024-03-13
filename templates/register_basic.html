@@ -1,0 +1,36 @@
+{% extends 'app.html' %}
+{% block content %}
+
+<div class="container">
+  <h2>Register form</h2>
+  <form action="/register" method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+        {{ form.name.label(for="name")}}
+        {{ form.name(id="name", class="form-control")}}
+    </div>
+
+    <div class="form-group">
+        {{ form.email.label(for="email")}}
+        {{ form.email(id="email", class="form-control")}}
+    </div>
+
+    <div class="form-group">
+        {{ form.password.label(for="password")}}
+        {{ form.password(id="password", class="form-control")}}
+    </div>
+
+    <div class="form-group">
+        {{ form.passwordCheck.label(for="passwordCheck")}}
+        {{ form.passwordCheck(id="passwordCheck", class="form-control")}}
+    </div>
+
+    {{ form.submit(class="btn btn-dark mt-4")}}
+
+    <a href="/login" class="btn btn-secondary mt-4">Login page</a>
+    <a href="/" class="btn btn-secondary mt-4">Home</a>
+  </form>
+</div>
+
+{% endblock %}
