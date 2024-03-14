@@ -5,7 +5,7 @@ mysql = None  # mysql 인스턴스 초기화
 def init_db(app):
     global mysql
     mysql = MySQL(app)
-
+ 
 def insert_user(name, email, hashed_password):
     try:
         with mysql.connection.cursor() as cursor:
@@ -13,8 +13,8 @@ def insert_user(name, email, hashed_password):
             mysql.connection.commit()
         return True
     except Exception as e:
-        print(f"DB Insert Error: {e}")
         mysql.connection.rollback()
+        print(f"DB Insert Error: {e}")
         return False
 
 def get_user_by_email(email):
