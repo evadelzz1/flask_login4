@@ -3,20 +3,27 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, validators, ValidationError
 from flask_mysqldb import MySQL
 import bcrypt
+import pickle
+import config
 
 app = Flask(__name__)
 
-### MySQL Configuration
-app.config['MYSQL_HOST'] = '127.0.0.1'
-app.config['MYSQL_USER'] = 'scott'
-app.config['MYSQL_PASSWORD'] = 'tiger'
-app.config['MYSQL_DB'] = 'flask_login4'
-app.secret_key = '5d10d4c2c2e23af3377bd942f8c62762cce09465d3c65f8a67da228150ef830e' # your_secret_key_here
-# python -c 'import secrets; print(secrets.token_hex())'
+###################################################
+############### MySQL Configuration ###############
 
+app.config.from_object('config.DevelopmentConfig')
+# app.config['MYSQL_HOST'] = '127.0.0.1'
+# app.config['MYSQL_USER'] = 'scott'
+# app.config['MYSQL_PASSWORD'] = 'tiger'
+# app.config['MYSQL_DB'] = 'flask_login4'
+# app.config['MYSQL_PORT'] = 3306
+# app.secret_key = 'your_secret_key_here'
 
 mysql = MySQL(app)
 
+
+###################################################
+###############   Class Definition  ###############
 class RegisterForm(FlaskForm):
     name = StringField("Name", validators=[
         validators.DataRequired(),
@@ -40,7 +47,7 @@ class RegisterForm(FlaskForm):
     ])
     
     submit = SubmitField("Register")
-       
+    
 class LoginForm(FlaskForm):
     email = StringField(
         label="Email",
@@ -58,7 +65,28 @@ class LoginForm(FlaskForm):
     
     submit = SubmitField("Login")
 
-### route Definition
+class User:
+    def __init__(self, id, name, email):
+        self.id = id
+        self.name = name
+        self.email = email
+
+
+###################################################
+############### Function Definition ###############
+
+# 객체 직렬화 및 세션에 저장
+def save_object_in_session(obj, key):
+    session[key] = pickle.dumps(obj).hex()
+
+# 세션에서 객체 역직렬화하여 추출
+def get_object_from_session(key):
+    return pickle.loads(bytes.fromhex(session[key]))
+
+
+###################################################
+###############   Route Definition  ###############
+
 @app.route('/')
 @app.route('/index.html')
 def index():
@@ -109,10 +137,13 @@ def login():
 
         except Exception as e:
             flash(f'Database connection error: {e}', 'danger')
+            print(f'Database connection error: {e}')
             return render_template('error.html', title='Error')
         
         if user and bcrypt.checkpw(password.encode('utf-8'), user[3].encode('utf-8')):
             session['user_id'] = user[0]
+            session['user'] = pickle.dumps(user).hex()
+            print(f">>> Serialized User Object : {session['user']}")
             return redirect(url_for('dashboard'))
         else:
             flash("Login failed. Please check your email and password")
@@ -124,7 +155,9 @@ def login():
 def dashboard():
     if 'user_id' in session:
         user_id = session['user_id']
-                
+        user2 = pickle.loads(bytes.fromhex(session['user']))
+        print(f">>> Deserialization User Object : {user2}")
+        
         try:
             with mysql.connection.cursor() as cursor:
                 cursor.execute("SELECT * FROM users where id=%s",(user_id,))

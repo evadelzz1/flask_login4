@@ -1,25 +1,31 @@
 from flask import Flask, render_template, redirect, url_for, session, flash
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, validators
-#from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import DataRequired, Email, ValidationError
 import bcrypt
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
 
 # MySQL Configuration
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'mydatabase'
-app.secret_key = 'your_secret_key_here'
+app.config['MYSQL_HOST'] = '127.0.0.1'
+app.config['MYSQL_USER'] = 'scott'
+app.config['MYSQL_PASSWORD'] = 'tiger'
+app.config['MYSQL_DB'] = 'flask_login4'
+app.secret_key = '5d10d4c2c2e23af3377bd942f8c62762cce09465d3c65f8a67da228150ef830e' # your_secret_key_here
+# python -c 'import secrets; print(secrets.token_hex())'
 
 mysql = MySQL(app)
 
+######################## wtforms Definition ########################
+# wtforms doc : https://wtforms.readthedocs.io/en/3.1.x/
+# - https://flask-docs-kr.readthedocs.io/latest/patterns/wtforms.html
+####################################################################
+#
 # from wtforms import Form, BooleanField, TextField, PasswordField, validators
-
+#
 # class RegistrationForm(Form):
-#     username = TextField('Username', [validators.Length(min=4, max=25)])
+#     name = TextField('Name', [validators.Length(min=4, max=25)])
 #     email = TextField('Email Address', [validators.Length(min=6, max=35)])
 #     password = PasswordField('New Password', [
 #         validators.Required(),
@@ -27,8 +33,7 @@ mysql = MySQL(app)
 #     ])
 #     confirm = PasswordField('Repeat Password')
 #     accept_tos = BooleanField('I accept the TOS', [validators.Required()])
-    
-    
+
 class RegisterForm(FlaskForm):
     name = StringField("Name",validators=[DataRequired()])
     email = StringField("Email",validators=[DataRequired(), Email()])
@@ -47,7 +52,6 @@ class LoginForm(FlaskForm):
     email = StringField("Email",validators=[DataRequired(), Email()])
     password = PasswordField("Password",validators=[DataRequired()])
     submit = SubmitField("Login")
-
 
 
 @app.route('/')
@@ -85,6 +89,7 @@ def login():
         cursor.execute("SELECT * FROM users WHERE email=%s",(email,))
         user = cursor.fetchone()
         cursor.close()
+        
         if user and bcrypt.checkpw(password.encode('utf-8'), user[3].encode('utf-8')):
             session['user_id'] = user[0]
             return redirect(url_for('dashboard'))
@@ -117,4 +122,3 @@ def logout():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80, debug=True)
-    

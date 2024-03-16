@@ -20,16 +20,17 @@ Flask MySQL Authentication Tutorial: Login, Register, Logout, and Dashboard
 
 
 ### Reference
+      v1.py : original
+      v2.py : try ~ except ~
+      v3.py : with
+      v4.py : save object in session store
+      v5.py : split file (config, class, db)
 
-[Flask MySQL Authentication Tutorial: Login, Register, Logout, and Dashboard](https://www.youtube.com/watch?v=aV8YSefG1fw)
-
-[github](https://github.com/kritimyantra/flask-mysql-auth-system)
-
-[Flask-WTF](https://velog.io/@2jinu/Flask-Flask-WTF)
-
-[Flask-Doc](https://flask-docs-kr.readthedocs.io)
-
-[wtforms Definition](https://wtforms.readthedocs.io/en/3.1.x/)
+- [Flask MySQL Authentication Tutorial: Login, Register, Logout, and Dashboard](https://www.youtube.com/watch?v=aV8YSefG1fw)
+- [github](https://github.com/kritimyantra/flask-mysql-auth-system)
+- [Flask-WTF](https://velog.io/@2jinu/Flask-Flask-WTF)
+- [Flask-Doc](https://flask-docs-kr.readthedocs.io)
+- [wtforms Definition](https://wtforms.readthedocs.io/en/3.1.x/)
 
 
 ### mysql Install

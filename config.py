@@ -16,13 +16,13 @@ class DevelopmentConfig(Config):
     DEBUG = True
     # SQLALCHEMY_DATABASE_URI = os.getenv('DEV_DATABASE_URL') or \
     #     'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
-
+    
     # SQLALCHEMY_DATABASE_URI = f"mysql://{os.getenv('DB_USER')}:" \
     #                           f"{os.getenv('DB_PWD')}@" \
     #                           f"{os.getenv('DB_HOST')}:" \
     #                           f"{os.getenv('DB_PORT')}/" \
     #                           f"{os.getenv('DB_NAME')}?charset=utf8"
-                              
+
     MYSQL_USER = os.getenv('DEV_DB_USER') or 'root'
     MYSQL_PASSWORD = os.getenv('DEV_DB_PWD') or ''
     MYSQL_HOST = os.getenv('DEV_DB_HOST') or 'localhost'
