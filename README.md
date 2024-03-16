@@ -4,11 +4,13 @@ Flask MySQL Authentication Tutorial: Login, Register, Logout, and Dashboard
 
 ### Install
 
-      git clone https://github.com/evadelzz1/flask-auth-ex1.git
+      git clone https://github.com/evadelzz1/flask_login4.git
 
-      cd ./flask-auth-ex1/
+      cd ./flask_login4/
 
-      python -m venv .venv && source .venv/bin/activate
+      python -m venv .venv
+      
+      source .venv/bin/activate
 
       pip install -r requirements.txt
 
