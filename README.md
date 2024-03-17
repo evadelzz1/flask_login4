@@ -20,6 +20,8 @@ Flask MySQL Authentication Tutorial: Login, Register, Logout, and Dashboard
       
       python app.py
 
+      python app_orig.py
+
 
 ### Reference
       v1.py : original
@@ -47,6 +49,12 @@ Flask MySQL Authentication Tutorial: Login, Register, Logout, and Dashboard
 
       mysql -u root -p
 
+      create user scott@'%' identified by 'tiger';
+
+      grant all privileges on *.* to scott@'%';
+
+      flush privileges;
+
       mysql.server stop
 
       # remove mysql
@@ -58,3 +66,13 @@ Flask MySQL Authentication Tutorial: Login, Register, Logout, and Dashboard
             sudo rm -rf /usr/local/var/mysql
             sudo rm -rf /usr/local/bin/mysql*
             sudo rm -rf /usr/local/Cellar/mysql
+
+
+[TroubleShoot] no such file libmysqlclient.2x.dylib
+
+- https://jakpentest.tistory.com/entry/TroubleShoot-libmysqlclient22dylib-no-such-file
+
+      ImportError: dlopen(/Users/way2bit/Desktop/lippsalabs/python/flask_login4/.venv/lib/python3.11/site-packages/MySQLdb/_mysql.cpython-311-darwin.so, 0x0002): Library not loaded: /usr/local/opt/mysql/lib/libmysqlclient.22.dylib
+
+      pip uninstall mysqlclient
+      pip install --no-cache mysqlclient
